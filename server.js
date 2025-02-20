@@ -6,8 +6,8 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-// Serve static files from the current directory (including chatbox.js)
-app.use(express.static('.'));
+// Serve static files (including chatbox.js)
+app.use(express.static('public'));
 
 // Handle socket connections
 io.on('connection', (socket) => {
