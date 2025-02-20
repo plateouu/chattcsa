@@ -34,7 +34,7 @@
         }
 
         // Set up Socket.io client-side
-        const socket = io('https://chatboxforcsa-vercel.app'); // Vercel URL for Socket.io server
+        const socket = io('https://chatboxforcsa.vercel.app'); // Your Vercel URL for Socket.io server
 
         // Handle sending messages
         const chatInput = document.getElementById('chat-input');
