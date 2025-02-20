@@ -34,11 +34,10 @@
         }
 
         // Set up Socket.io client-side
-        const socket = io('https://chatboxforcsa-q1ivdguwv-plateouus-projects.vercel.app'); // Replace with your Vercel URL
+        const socket = io('https://chatboxforcsa-vercel.app'); // Vercel URL for Socket.io server
 
         // Handle sending messages
         const chatInput = document.getElementById('chat-input');
-        
         const username = 'User'; // Default username
 
         chatInput.addEventListener('keypress', (e) => {
@@ -52,15 +51,20 @@
             }
         });
 
-        // Listen for incoming messages from server
+        // Listen for incoming messages from the server
         socket.on('chatMessage', (msg) => {
             addMessage(msg.username, msg.message); // Display the message
         });
 
-        // Hide the chatbox when "P" is pressed
+        // Hide the chatbox when "P" is pressed, but allow typing if the input is focused
         let isChatboxVisible = true; // Track visibility
+        chatInput.addEventListener('focus', () => {
+            isChatboxVisible = true; // Keep the chatbox visible while typing
+        });
+
         document.addEventListener('keydown', (e) => {
             if (e.key === 'p' || e.key === 'P') {
+                if (document.activeElement === chatInput) return; // Prevent toggle if the input is focused
                 isChatboxVisible = !isChatboxVisible; // Toggle visibility
                 document.getElementById('chatbox').style.display = isChatboxVisible ? 'flex' : 'none';
             }
