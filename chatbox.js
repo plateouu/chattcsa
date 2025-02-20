@@ -1,4 +1,7 @@
 (function() {
+    // Check if the chatbox already exists on the page
+    if (document.getElementById('chatbox')) return; // If it exists, don't create a new one
+    
     // HTML structure for the chatbox
     const chatboxHTML = `
     <div id="chatbox" style="position: fixed; bottom: 20px; right: 20px; width: 250px; height: 300px; background: rgba(0, 0, 0, 0.7); border: none; display: flex; flex-direction: column; font-family: Arial, sans-serif; z-index: 9999; border-radius: 8px;">
@@ -34,6 +37,15 @@
                 addMessage(username, message); // Use the fixed username here
                 chatInput.value = ''; // Clear the input field after sending the message
             }
+        }
+    });
+
+    // Hide the chatbox when "P" is pressed
+    let isChatboxVisible = true; // Track visibility
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'p' || e.key === 'P') {
+            isChatboxVisible = !isChatboxVisible; // Toggle visibility
+            document.getElementById('chatbox').style.display = isChatboxVisible ? 'flex' : 'none';
         }
     });
 })();
